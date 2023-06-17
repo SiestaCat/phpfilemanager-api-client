@@ -8,6 +8,11 @@
             "Siestacat\\PhpfilemanagerApiClient\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Siestacat\\PhpfilemanagerApiClient\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "SiestaCat"
@@ -15,7 +20,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.0",
+        "siestacat/phpfilemanager": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.2.2"

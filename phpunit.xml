@@ -3,6 +3,13 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true">
+    <php>
+        <ini name="display_errors" value="1" />
+        <ini name="error_reporting" value="-1" />
+        <env name="API_URL" value="http://localhost:8000/" force="true" />
+        <env name="API_KEY" value="apikey_here" force="true" />
+    </php>
+    
     <testsuites>
         <testsuite name="Test Suite">
             <directory>tests</directory>
