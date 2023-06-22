@@ -62,8 +62,8 @@ final class Client
 
         //Curl options
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->ssl_verify);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->ssl_verify);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->ssl_verify?2:0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->ssl_verify?2:0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
