@@ -16,6 +16,7 @@ final class Client
 
     const EXPECT_RESPONSE_JSON = 1;
     const EXPECT_RESPONSE_FILE = 2;
+    const EXPECT_RESPONSE_BINARY = 3;
 
     protected ?string $url = null;
 
@@ -102,7 +103,9 @@ final class Client
                     (
                         $expect_response !== self::EXPECT_RESPONSE_FILE &&
                         $response !== false && $response !== ''
-                    ) || $expect_response === self::EXPECT_RESPONSE_FILE
+                    )
+                    ||
+                    $expect_response === self::EXPECT_RESPONSE_FILE
                 )
             )
         )
@@ -123,6 +126,11 @@ final class Client
         {
             fclose($fp);
             return $tmp_file_path;
+        }
+
+        if($expect_response === self::EXPECT_RESPONSE_BINARY)
+        {
+            return $response;
         }
 
         

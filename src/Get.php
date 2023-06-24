@@ -7,7 +7,7 @@ final class Get
     public function __construct(private Client $client)
     {}
 
-    public function get(string $hash):string
+    public function get(string $hash, bool $get_tmp_file = true):string
     {
         return $this->client->makeRequest
         (
@@ -15,7 +15,9 @@ final class Get
             'get/' . $hash,
             [],
             [],
-            Client::EXPECT_RESPONSE_FILE
+            (
+                $get_tmp_file ? Client::EXPECT_RESPONSE_FILE : Client::EXPECT_RESPONSE_BINARY
+            )
         );
     }
 }

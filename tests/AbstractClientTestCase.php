@@ -85,15 +85,39 @@ class AbstractClientTestCase extends TestCase
                 $this->assertTrue($exists_response->success);
                 $this->assertTrue($exists_response->exists);
 
-
-
-                $file_path = $this->createClient()->getGetFileClient()->get($hash);
-
-                $this->assertEquals
+                foreach
                 (
-                    FileCommander::_hash_file($file_path),
-                    $hash
-                );
+                    [
+                        Client::EXPECT_RESPONSE_FILE,
+                        Client::EXPECT_RESPONSE_BINARY
+                    ]
+                    as
+                    $response_type
+                )
+                {
+                    $get_response = $this->createClient()->getGetFileClient()->get($hash, (Client::EXPECT_RESPONSE_FILE === $response_type));
+
+                    if($response_type === Client::EXPECT_RESPONSE_FILE)
+                    {
+                        $file_path = $get_response;
+                        $local_hash = FileCommander::_hash_file($file_path);
+                    }
+
+                    if($response_type === Client::EXPECT_RESPONSE_BINARY)
+                    {
+                        $local_hash = hash(FileCommander::DEFAULT_HASH_ALGO, $get_response);
+                    }
+
+                    $this->assertEquals
+                    (
+                        $local_hash,
+                        $hash
+                    );
+                }
+
+                
+
+                
             }
 
             $this->deleteFiles($hashes);
